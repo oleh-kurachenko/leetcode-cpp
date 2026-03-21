@@ -13,7 +13,8 @@ public:
 
         for (size_t i = 0; i < k / 2; ++i) {
             std::copy_n(grid[x + i].begin() + y, k, tmp.begin());
-            std::copy_n(grid[x + k - i - 1].begin() + y, k, grid[x + i].begin() + y);
+            std::copy_n(grid[x + k - i - 1].begin() + y, k,
+                        grid[x + i].begin() + y);
             std::copy_n(tmp.begin(), k, grid[x + k - i - 1].begin() + y);
         }
 
