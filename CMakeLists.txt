@@ -9,4 +9,13 @@ else()
   message(FATAL_ERROR "LEETCODE_PROBLEM_ID not defined")
 endif()
 
-add_executable(${PROJECT_NAME} "src/${LEETCODE_PROBLEM_ID}.cpp")
+string(LENGTH "${LEETCODE_PROBLEM_ID}" LEN)
+while(LEN LESS 4)
+    set(LEETCODE_PROBLEM_ID "0${LEETCODE_PROBLEM_ID}")
+    string(LENGTH "${LEETCODE_PROBLEM_ID}" LEN)
+endwhile()
+
+string(SUBSTRING "${LEETCODE_PROBLEM_ID}" 0 2 PROBLEM_DIRECTORY)
+string(SUBSTRING "${LEETCODE_PROBLEM_ID}" 2 2 PROBLEM_ID)
+
+add_executable(${PROJECT_NAME} "src/${PROBLEM_DIRECTORY}/${PROBLEM_ID}.cpp")
