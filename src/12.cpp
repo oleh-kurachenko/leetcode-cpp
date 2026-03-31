@@ -2,14 +2,14 @@
 #include <string>
 
 #include <algorithm>
-#include <cassert>
-#include <vector>
-#include <cstdint>
 #include <array>
+#include <cassert>
+#include <cstdint>
 #include <sstream>
+#include <vector>
 
 class Solution {
-private:
+  private:
     static constexpr size_t N{4};
 
     struct DigitGroup {
@@ -17,10 +17,13 @@ private:
         char FIVE;
     };
 
+    // clang-format off
     static constexpr std::array<DigitGroup, N> ROMAN_DIGITS{
-        DigitGroup{'M', '_'}, DigitGroup{'C', 'D'}, DigitGroup{'X', 'L'},
-        DigitGroup{'I', 'V'}
-    };
+        DigitGroup{'M', '_'},
+        DigitGroup{'C', 'D'},
+        DigitGroup{'X', 'L'},
+        DigitGroup{'I', 'V'}};
+    // clang-format on
 
     std::array<std::uint8_t, N> toNDigits(int number) {
         std::array<std::uint8_t, N> digits{};
@@ -34,7 +37,7 @@ private:
         return digits;
     }
 
-public:
+  public:
     std::string intToRoman(int num) {
         assert(num >= 0 && num <= 3999);
 
@@ -70,4 +73,6 @@ public:
 
 int main() {
     std::cout << Solution().intToRoman(3999) << std::endl;
+
+    return 0;
 }
