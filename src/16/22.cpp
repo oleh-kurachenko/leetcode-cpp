@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <vector>
 
+#include "../algorithms/inverse_multiplier_modulo.cpp"
+
 class Fancy {
   public:
     void append(int val) {
@@ -29,7 +31,9 @@ class Fancy {
 
         uint64_t effective_multiplier{
             entries.back().multiplier *
-            get_mult_inverse(entries[idx].multiplier) % MODULO};
+            inverse_multiplier_modulo<uint64_t, MODULO>(
+                entries[idx].multiplier) %
+            MODULO};
 
         uint64_t effective_addend{
             (entries.back().addend + MODULO -
@@ -52,25 +56,6 @@ class Fancy {
     };
 
     std::vector<Entry> entries{{0, 1, 0}};
-
-    static uint64_t get_mult_inverse(const uint64_t value) {
-        uint64_t result{1};
-        uint64_t multiplier{value};
-        uint64_t remaining_power{MODULO - 2};
-
-        while (remaining_power) {
-            if (remaining_power % 2) {
-                result *= multiplier;
-                result %= MODULO;
-            }
-
-            multiplier *= multiplier;
-            multiplier %= MODULO;
-            remaining_power /= 2;
-        }
-
-        return result;
-    }
 };
 
 int main() {
