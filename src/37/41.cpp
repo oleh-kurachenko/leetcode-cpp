@@ -1,17 +1,22 @@
-#include <iosfwd>
-#include <iostream>
-#include <vector>
-
-#include <array>
 #include <climits>
 #include <cstdint>
 #include <cstring>
-#include <limits>
 
-// for problem 3740: uint8_t, uint16_t, 101
+#include <array>
+#include <bit>
+#include <iostream>
+#include <limits>
+#include <vector>
+
+#if PROBLEM_ID == 3741
 using uint_t = uint32_t;
 using uint_double_t = uint64_t;
 constexpr uint_t N_MAX{100'001};
+#elif PROBLEM_ID == 3740
+using uint_t = uint8_t;
+using uint_double_t = uint16_t;
+constexpr uint_t N_MAX{101};
+#endif
 
 static_assert(2 * sizeof(uint_t) == sizeof(uint_double_t));
 
